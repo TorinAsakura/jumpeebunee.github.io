@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */  // --> OFF
+
 import { IUser, AuthUser } from './types';
 
 const credentials: IUser[] = [];
@@ -95,5 +97,5 @@ export const authController = {
     logout,
     register,
     whoami,
-    credentials,
+    credentials
 }
