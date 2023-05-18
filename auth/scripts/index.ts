@@ -1,6 +1,9 @@
-/* eslint no-console: 0 */  // --> OFF
+/* eslint no-console: 0 */  // --> off console.log errors
 
 import { IUser, AuthUser } from './types';
+import { userValidation } from './helpers/userValidation';
+import { errorHandle } from './helpers/errorHandle';
+import { ApiError } from './errors';
 
 const credentials: IUser[] = [];
 let authUser: AuthUser = {isAuth: false, userData: {}}
@@ -8,13 +11,13 @@ let authUser: AuthUser = {isAuth: false, userData: {}}
 const login = (username: string, password: string): void => {
     try {
         if (authUser.isAuth) {
-            throw new Error('You are already logged in');
+            throw ApiError.AuthError('You are already logged in');
         }
 
         const findedUser = credentials.find(user => user.username === username && user.password === password);
 
         if (!findedUser) {
-            throw new Error('Incorrect username or password');
+            throw ApiError.AuthError('Incorrect username or password');
         }
 
         const activeUser: IUser = {
@@ -25,41 +28,35 @@ const login = (username: string, password: string): void => {
         authUser = {isAuth: true, userData: activeUser};
         console.log(`Successfully logged in ${username}`);
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        } 
+        errorHandle(error);
     }
 }
 
 const logout = (): void => {
     try {
         if (!authUser.isAuth) {
-            throw new Error('You are not logged in');
+            throw ApiError.AuthError('You are not logged in');
         }
 
         console.log(`You are logged out from ${authUser.userData.username}`);
         authUser = {isAuth: false, userData: {}};
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        errorHandle(error);
     }
 }
 
 const register = (username: string, password: string): void => {
     try {
         if (authUser.isAuth) {
-            throw new Error('You are already logged in');
-        } else if (username.length < 5) {
-            throw new Error('Username must be at least 5 characters long');
-        } else if (password.length < 6) {
-            throw new Error('Password must be at least 6 characters long');
-        }
+            throw ApiError.AuthError('You are already logged in');
+        } 
 
-        const isFindedUsername = credentials.find(user => user.username === username);
+        userValidation(username, password);
+
+        const isFindedUsername = credentials.some(user => user.username === username);
         
         if (isFindedUsername) {
-            throw new Error('Username is already taken');
+            throw ApiError.AuthError('Username is already taken');
         }
 
         const createdUser: IUser = {
@@ -72,23 +69,19 @@ const register = (username: string, password: string): void => {
 
         console.log(`Successfully registered ${username}`);
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        errorHandle(error);
     }
 }
 
 const whoami = (): void => {
     try {
         if (!authUser.isAuth) {
-            throw new Error('You are not logged in');
+            throw ApiError.AuthError('You are not logged in');
         }
 
         console.log(`Your name is ${authUser.userData.username}`);
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        errorHandle(error);
     }
 }
 
@@ -97,5 +90,5 @@ export const authController = {
     logout,
     register,
     whoami,
-    credentials
+    credentials,
 }
