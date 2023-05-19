@@ -14,7 +14,7 @@ const login = (username: string, password: string): void => {
             throw ApiError.AuthError('You are already logged in');
         }
 
-        const findedUser = credentials.find(user => user.username === username && user.password === password);
+        const findedUser = credentials.some(user => user.username === username && user.password === password);
 
         if (!findedUser) {
             throw ApiError.AuthError('Incorrect username or password');
