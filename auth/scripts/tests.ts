@@ -7,7 +7,8 @@ const { whoami, logout, register, login } = authController;
 async function test(): Promise<void> {
     whoami();
     logout();
-    await register('Dmitry', 'qwe');
+    await register('Dmitry', '           qwe                       ');
+    await register('Dmitry', '                 ');
     await register('Dmitry', 'qwerty');
     whoami();
     await login('Dmitry', 'qwerty');

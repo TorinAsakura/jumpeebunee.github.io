@@ -4,6 +4,6 @@ export const errorHandle = (error: unknown): void => {
     if (error instanceof Error) {
         console.log(`${error.name}: ${error.message}`);
     } else {
-        console.log('Something went wrong');
+        console.log('Unknown error: Unknown error occured');
     }
 }

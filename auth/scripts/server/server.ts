@@ -4,11 +4,11 @@ import { IUser } from "../types";
 const credentials: IUser[] = [];
 
 const login = (username: string, password: string): Promise<IUser> => {
-    const findedUser = credentials.some(user => user.username === username && user.password === password);
+    const foundUser = credentials.some(user => user.username === username && user.password === password);
 
     return new Promise((res, rej) => {
         setTimeout(() => {
-            if (findedUser) {
+            if (foundUser) {
                 res({ username, password });
             } else {
                 rej(ApiError.AuthError('Incorrect username or password'));
@@ -18,11 +18,11 @@ const login = (username: string, password: string): Promise<IUser> => {
 };
 
 const register = (username: string, password: string): Promise<IUser> => {
-    const isFindedUsername = credentials.some(user => user.username === username);
+    const isFoundUser = credentials.some(user => user.username === username);
 
     return new Promise((res, rej) => {
         setTimeout(() => {
-            if (!isFindedUsername) {
+            if (!isFoundUser) {
                 res({ username, password });
                 credentials.push({ username, password });
             } else {
