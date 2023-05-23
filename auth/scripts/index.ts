@@ -1,29 +1,20 @@
 /* eslint no-console: 0 */  // --> off console.log errors
 
-import { IUser, AuthUser } from './types';
+import { AuthUser } from './types';
 import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
+import { server } from './server/server';
 
-const credentials: IUser[] = [];
 let authUser: AuthUser = {isAuth: false, userData: {}}
 
-const login = (username: string, password: string): void => {
+const login = async(username: string, password: string): Promise<void> => {
     try {
         if (authUser.isAuth) {
             throw ApiError.AuthError('You are already logged in');
         }
 
-        const findedUser = credentials.some(user => user.username === username && user.password === password);
-
-        if (!findedUser) {
-            throw ApiError.AuthError('Incorrect username or password');
-        }
-
-        const activeUser: IUser = {
-            username,
-            password,
-        }
+        const activeUser = await server.login(username, password);
 
         authUser = {isAuth: true, userData: activeUser};
         console.log(`Successfully logged in ${username}`);
@@ -45,7 +36,7 @@ const logout = (): void => {
     }
 }
 
-const register = (username: string, password: string): void => {
+const register = async(username: string, password: string): Promise<void> => {
     try {
         if (authUser.isAuth) {
             throw ApiError.AuthError('You are already logged in');
@@ -53,20 +44,9 @@ const register = (username: string, password: string): void => {
 
         userValidation(username, password);
 
-        const isFindedUsername = credentials.some(user => user.username === username);
-        
-        if (isFindedUsername) {
-            throw ApiError.AuthError('Username is already taken');
-        }
+        const createdUser = await server.register(username, password);
 
-        const createdUser: IUser = {
-            username,
-            password,
-        }
-
-        credentials.push(createdUser);
         authUser = {isAuth: true, userData: createdUser};
-
         console.log(`Successfully registered ${username}`);
     } catch (error) {
         errorHandle(error);
@@ -90,5 +70,4 @@ export const authController = {
     logout,
     register,
     whoami,
-    credentials,
 }

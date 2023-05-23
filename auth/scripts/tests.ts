@@ -2,16 +2,20 @@
 
 import { authController } from "./index";
 
-const { whoami, logout, register, login, credentials } = authController;
+const { whoami, logout, register, login } = authController;
 
-whoami();
-logout();
-register('Dmitry', 'qwe');
-register('Dmitry', 'qwerty');
-whoami();
-login('Dmitry', 'qwerty');
-register('Dmitry', 'qwerty');
-logout();
-login('Dmitry', 'qwerty123');
-register('Alexandr', '123123');
-console.log(credentials);
+async function test(): Promise<void> {
+    whoami();
+    logout();
+    await register('Dmitry', 'qwe');
+    await register('Dmitry', 'qwerty');
+    whoami();
+    await login('Dmitry', 'qwerty');
+    await register('Dmitry', 'qwerty');
+    logout();
+    await login('Dmitry', 'qwerty');
+    logout();
+    await register('Alexandr', '123123');
+}
+
+test();
