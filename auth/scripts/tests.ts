@@ -14,6 +14,7 @@ async function test(): Promise<void> {
     await login('Dmitry', 'qwerty');
     await register('Dmitry', 'qwerty');
     logout();
+    await login('Dmitry', 'qwerty1');
     await login('Dmitry', 'qwerty');
     logout();
     await register('Alexandr', '123123');

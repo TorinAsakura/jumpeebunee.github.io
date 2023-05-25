@@ -31,7 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@atls/schematics", "npm:0.0.13"],\
           ["@jest/core", "virtual:e82efaeb5dbad3cc20561562a12571d1e6ab3b0e3e16ee76fe3fbc78f117981828ff47b8e7cf32973a7efbf625114ac6c926b7c54a2ddba69de3de5d64ffe7f6#npm:29.5.0"],\
           ["@types/bcrypt", "npm:5.0.0"],\
-          ["@types/eslint", "npm:8.37.0"],\
+          ["@types/eslint", "npm:8.40.0"],\
           ["@types/node", "npm:20.1.3"],\
           ["bcrypt", "npm:5.1.0"],\
           ["eslint", "npm:8.18.0"],\
@@ -1976,19 +1976,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/eslint", [\
-      ["npm:8.37.0", {\
-        "packageLocation": "../../../.yarn/berry/cache/@types-eslint-npm-8.37.0-1f765f44f3-9.zip/node_modules/@types/eslint/",\
+      ["npm:8.4.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-eslint-npm-8.4.1-014f0ae240-9.zip/node_modules/@types/eslint/",\
         "packageDependencies": [\
-          ["@types/eslint", "npm:8.37.0"],\
+          ["@types/eslint", "npm:8.4.1"],\
           ["@types/estree", "npm:0.0.51"],\
           ["@types/json-schema", "npm:7.0.11"]\
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:8.4.1", {\
-        "packageLocation": "../../../.yarn/berry/cache/@types-eslint-npm-8.4.1-014f0ae240-9.zip/node_modules/@types/eslint/",\
+      ["npm:8.40.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-eslint-npm-8.40.0-f83ac3705a-9.zip/node_modules/@types/eslint/",\
         "packageDependencies": [\
-          ["@types/eslint", "npm:8.4.1"],\
+          ["@types/eslint", "npm:8.40.0"],\
           ["@types/estree", "npm:0.0.51"],\
           ["@types/json-schema", "npm:7.0.11"]\
         ],\
@@ -8087,7 +8087,7 @@ const RAW_RUNTIME_STATE =
           ["@atls/schematics", "npm:0.0.13"],\
           ["@jest/core", "virtual:e82efaeb5dbad3cc20561562a12571d1e6ab3b0e3e16ee76fe3fbc78f117981828ff47b8e7cf32973a7efbf625114ac6c926b7c54a2ddba69de3de5d64ffe7f6#npm:29.5.0"],\
           ["@types/bcrypt", "npm:5.0.0"],\
-          ["@types/eslint", "npm:8.37.0"],\
+          ["@types/eslint", "npm:8.40.0"],\
           ["@types/node", "npm:20.1.3"],\
           ["bcrypt", "npm:5.1.0"],\
           ["eslint", "npm:8.18.0"],\

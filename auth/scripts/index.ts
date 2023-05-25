@@ -4,8 +4,7 @@ import { AuthUser } from './types';
 import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
-import { server } from './server/server';
-import * as bcrypt from 'bcrypt';
+import { userService } from './service/user-service';
 
 let authUser: AuthUser = {isAuth: false, userData: {}}
 
@@ -15,7 +14,7 @@ const login = async(username: string, password: string): Promise<void> => {
             throw ApiError.AuthError('You are already logged in');
         }
 
-        const activeUser = await server.login(username, password)   ;
+        const activeUser = await userService.login(username, password);
 
         authUser = {isAuth: true, userData: activeUser};
         console.log(`Successfully logged in ${username}`);
@@ -45,7 +44,7 @@ const register = async(username: string, password: string): Promise<void> => {
 
         userValidation(username, password);
 
-        const createdUser = await server.register(username, password);
+        const createdUser = await userService.register(username, password);
 
         authUser = {isAuth: true, userData: createdUser};
         console.log(`Successfully registered ${username}`);
