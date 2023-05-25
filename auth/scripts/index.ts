@@ -5,6 +5,7 @@ import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
 import { server } from './server/server';
+import * as bcrypt from 'bcrypt';
 
 let authUser: AuthUser = {isAuth: false, userData: {}}
 
@@ -14,7 +15,7 @@ const login = async(username: string, password: string): Promise<void> => {
             throw ApiError.AuthError('You are already logged in');
         }
 
-        const activeUser = await server.login(username, password);
+        const activeUser = await server.login(username, password)   ;
 
         authUser = {isAuth: true, userData: activeUser};
         console.log(`Successfully logged in ${username}`);
