@@ -18,8 +18,8 @@
       "strict": true,
       "sourceMap": false,
       "target": "es2022",
-      "rootDir": "./auth",
-      "outDir": "./js"
+      "rootDir": "auth/src",
+      "outDir": "./dist"
     },
     "include": ["./auth/**/*"]
   }

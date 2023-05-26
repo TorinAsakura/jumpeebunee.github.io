@@ -1,8 +1,8 @@
 import { ApiError } from "../errors";
-import { IUser } from "../types";
+import { IUser } from "../types/types";
 import * as bcrypt from 'bcrypt'
 
-const credentials: IUser[] = [];
+let credentials: IUser[] = [];
 
 const login = async(username: string, password: string): Promise<IUser> => {
     const foundUser = credentials.find(user => user.username === username);
@@ -25,7 +25,12 @@ const register = async(username: string, password: string): Promise<IUser> => {
     return { username, password: hashedPassword };
 }
 
+const clearCredentials = (): void => {
+    credentials = [];
+}
+
 export const userService = {
     login,
     register,
+    clearCredentials,
 }

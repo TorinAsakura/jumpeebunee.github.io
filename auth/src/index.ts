@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */  // --> off console.log errors
 
-import { AuthUser } from './types';
+import { AuthUser } from './types/types';
 import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
@@ -36,7 +36,7 @@ const logout = (): void => {
     }
 }
 
-const register = async(username: string, password: string): Promise<void> => {
+const register = async(username: string, password: string): Promise<string> => {
     try {
         if (authUser.isAuth) {
             throw ApiError.AuthError('You are already logged in');
@@ -47,9 +47,9 @@ const register = async(username: string, password: string): Promise<void> => {
         const createdUser = await userService.register(username, password);
 
         authUser = {isAuth: true, userData: createdUser};
-        console.log(`Successfully registered ${username}`);
+        return `Successfully registered ${username}`;
     } catch (error) {
-        errorHandle(error);
+        return errorHandle(error);
     }
 }
 

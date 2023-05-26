@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */  // --> off console.log errors
 
-import { authController } from "./index";
+import { authController } from "../index";
 
 const { whoami, logout, register, login } = authController;
 

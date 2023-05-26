@@ -1,4 +1,4 @@
-import { VALID_CHARACTERS } from "../data/data";
+import { VALID_CONFIG } from "../data/data";
 import { ApiError } from "../errors";
 
 const checkValidity = (input: string, field: string, min: number, max: number): void => {
@@ -9,16 +9,9 @@ const checkValidity = (input: string, field: string, min: number, max: number): 
     } else if (input.length < min) {
         throw ApiError.ValidationError(`${field} is too short (minimum is ${min} characters)`);
     }
-
-    input.split('').forEach(item => {
-        if (!VALID_CHARACTERS.includes(item.toLocaleLowerCase())) {
-            throw ApiError.ValidationError(`${field} contains invalid characters (use only A-Z and 0-9)`);
-        }
-    })
-
 }
 
 export const userValidation = (username: string, password: string): void => {
-    checkValidity(username.trim(), "Username", 5, 30);
+    checkValidity(username.trim(), "Username", VALID_CONFIG.username.min, VALID_CONFIG.username.max);
     checkValidity(password.trim(), "Password", 6, 128);
 }
