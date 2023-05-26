@@ -1,10 +1,9 @@
 import { VALID_CONFIG } from "../data/data";
 import { ApiError } from "../errors";
 import { authController } from "../index";
-import { userService } from "../service/user-service";
+import userService from "../service/user-service";
 
 const { register, login, clearAuthUser, logout, whoami } = authController;
-const { clearCredentials } = userService;
 
 const validError = ApiError.ValidationError.name;
 const authError = ApiError.AuthError.name;
@@ -14,7 +13,7 @@ const DEFAULT_PASS = '123123123';
 
 afterEach(() => {
   clearAuthUser();
-  clearCredentials();
+  userService.clearCredentials();
 });
 
 describe('Registration', () => {

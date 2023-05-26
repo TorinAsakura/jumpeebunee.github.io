@@ -4,7 +4,7 @@ import { AuthUser } from './types/types';
 import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
-import { userService } from './service/user-service';
+import userService from './service/user-service';
 
 let authUser: AuthUser = {isAuth: false, userData: {}};
 
