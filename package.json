@@ -4,7 +4,7 @@
   "license": "BSD 3-Clause",
   "scripts": {
     "postpack": "tsc",
-    "start": "node dist/tests.js"
+    "start": "node ./auth/dist/index.js"
   },
   "devDependencies": {
     "@atls/code-service": "^0.0.18",

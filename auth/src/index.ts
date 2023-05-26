@@ -6,9 +6,9 @@ import { errorHandle } from './helpers/errorHandle';
 import { ApiError } from './errors';
 import { userService } from './service/user-service';
 
-let authUser: AuthUser = {isAuth: false, userData: {}}
+let authUser: AuthUser = {isAuth: false, userData: {}};
 
-const login = async(username: string, password: string): Promise<void> => {
+const login = async(username: string, password: string): Promise<string> => {
     try {
         if (authUser.isAuth) {
             throw ApiError.AuthError('You are already logged in');
@@ -17,22 +17,22 @@ const login = async(username: string, password: string): Promise<void> => {
         const activeUser = await userService.login(username, password);
 
         authUser = {isAuth: true, userData: activeUser};
-        console.log(`Successfully logged in ${username}`);
+        return `Successfully logged in ${username}`;
     } catch (error) {
-        errorHandle(error);
+        return errorHandle(error);
     }
 }
 
-const logout = (): void => {
+const logout = (): string => {
     try {
         if (!authUser.isAuth) {
             throw ApiError.AuthError('You are not logged in');
         }
 
-        console.log(`You are logged out from ${authUser.userData.username}`);
         authUser = {isAuth: false, userData: {}};
+        return `You are logged out from account`;
     } catch (error) {
-        errorHandle(error);
+        return errorHandle(error);
     }
 }
 
@@ -53,21 +53,26 @@ const register = async(username: string, password: string): Promise<string> => {
     }
 }
 
-const whoami = (): void => {
+const whoami = (): string => {
     try {
         if (!authUser.isAuth) {
             throw ApiError.AuthError('You are not logged in');
         }
 
-        console.log(`Your name is ${authUser.userData.username}`);
+        return `Your name is ${authUser.userData.username}`;
     } catch (error) {
-        errorHandle(error);
+        return errorHandle(error);
     }
 }
 
+const clearAuthUser = () => {
+    authUser = {isAuth: false, userData: {}};
+}
+ 
 export const authController = {
     login,
     logout,
     register,
     whoami,
+    clearAuthUser
 }

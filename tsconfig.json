@@ -19,7 +19,7 @@
       "sourceMap": false,
       "target": "es2022",
       "rootDir": "auth/src",
-      "outDir": "./dist"
+      "outDir": "auth/dist"
     },
     "include": ["./auth/**/*"]
   }
