@@ -1,5 +1,3 @@
-/* eslint no-console: 0 */  // --> off console.log errors
-
 import { AuthUser } from './types/types';
 import { userValidation } from './helpers/userValidation';
 import { errorHandle } from './helpers/errorHandle';

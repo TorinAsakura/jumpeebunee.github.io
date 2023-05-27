@@ -52,4 +52,4 @@ describe('Registration', () => {
     const data = await register(username, password);
     expect(data).toEqual(`Successfully registered ${username}`);
   });
-});
+})
