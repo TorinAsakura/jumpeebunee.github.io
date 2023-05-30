@@ -1,6 +1,6 @@
 import { ApiError } from "../errors";
 import { IUser } from "../types/types";
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcryptjs'
 
 class UserService {
 
